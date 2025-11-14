@@ -10,59 +10,114 @@ const AuthProvider = ({ children }) => {
 
   const API_URL = "https://jsonplaceholder.typicode.com/posts";
 
-    useEffect(() => {
-        const fetchUsers = async() => {
-            try {
-                setLoading(true);
-                const res = await axios.get(API_URL);
-                setUsers(res.data);
-                setError(null)
-            } catch (error) {
-                setError(error);
-                return{success: false, error: error.message};
-            } finally{
-                setLoading(false);
-            }
+  useEffect(() => {
+    const fetchUsers = async() => {
+        try {
+            setLoading(true);
+            const res = await axios.get(API_URL);
+            setUsers(res.data);
+            setError(null);
+        } catch (error) {
+            setError(error.message);
+        } finally{
+            setLoading(false);
         }
-        fetchUsers();
-    },[])
+    }
+    fetchUsers();
+  },[])
+
+    // useEffect(() => {
+    //     const fetchUsers = async() => {
+    //         try {
+    //             setLoading(true);
+    //             const res = await axios.get(API_URL);
+    //             setUsers(res.data);
+    //             setError(null)
+    //         } catch (error) {
+    //             setError(error);
+    //             return{success: false, error: error.message};
+    //         } finally{
+    //             setLoading(false);
+    //         }
+    //     }
+    //     fetchUsers();
+    // },[])
+
+    // const createUser = async(newUser) => {
+    //     try {
+    //         setLoading(true);
+    //         const res = await axios.post(API_URL, newUser);
+    //         setUsers((prev) => [res.data,...prev]);
+    //     } catch (error) {
+    //         setError(error.message);
+    //     } finally{
+    //         setLoading(false);
+    //     }
+    // }
 
     const createUser = async(newUser) => {
         try {
             setLoading(true);
             const res = await axios.post(API_URL, newUser);
-            setUsers((prev) => [res.data,...prev]);
+            setUsers((prev) => [res.data, ...prev]);
         } catch (error) {
             setError(error.message);
         } finally{
             setLoading(false);
         }
     }
+
+
+
+    // const updateUser = async(id, updatedUser) => {
+    //     try {
+    //         setLoading(true);
+    //         const res = await axios.put(`${API_URL}/${id}`, updatedUser);
+    //         setUsers((prev) => prev.map(user => (user.id === id)? {...user, ...res} : user))
+    //     } catch (error) {
+    //         setError(error.message);
+    //     } finally{
+    //         setLoading(false);
+    //     }
+    // }
 
     const updateUser = async(id, updatedUser) => {
         try {
             setLoading(true);
             const res = await axios.put(`${API_URL}/${id}`, updatedUser);
-            setUsers((prev) => prev.map(user => (user.id === id)? {...user, ...res} : user))
+            setUsers((prev) => prev.map(user => user.id === id ? {...user, ...res.data} : user))
         } catch (error) {
-            setError(error.message);
+            setError(error.message)
         } finally{
             setLoading(false);
         }
     }
 
-    const deleteUser = async(id) => {
+
+    const deleteUser = async(id)=> {
         try {
             setLoading(true);
             await axios.delete(`${API_URL}/${id}`);
             setUsers(prev => prev.filter(user => user.id !== id));
             setError(null);
         } catch (error) {
-            setError(error.message);           
+            setError(error.message);
         } finally{
             setLoading(false);
         }
     }
+    // const deleteUser = async(id) => {
+    //     try {
+    //         setLoading(true);
+    //         await axios.delete(`${API_URL}/${id}`);
+    //         setUsers(prev => prev.filter(user => user.id !== id));
+    //         setError(null);
+    //     } catch (error) {
+    //         setError(error.message);           
+    //     } finally{
+    //         setLoading(false);
+    //     }
+    // }
 
   const userInfo = {
     users,
