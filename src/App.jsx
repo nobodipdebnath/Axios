@@ -9,8 +9,6 @@ function App() {
   const [form, setForm] = useState({ title: "", body: "" });
   const [editingId, setEditingId] = useState(null);
 
-  // const [form, setForm] = useState({ title: "", body: "" });
-  // const [editingId, setEditingId] = useState(null);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -26,39 +24,15 @@ function App() {
     setForm({title: '', body: ''})
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   if (form.title === "" || form.body === "") {
-  //     return;
-  //   }
-  //   if (editingId) {
-  //     await updateUser(editingId, form);
-  //     setEditingId(null);
-  //   } else {
-  //     await createUser(form);
-  //   }
-  //   setForm({ title: "", body: "" });
-  // };
-
   const handleEdit = (user) => {
     setForm({title: user.title, body: user.body});
     setEditingId(user.id)
   }
 
-  // const handleEdit = (user) => {
-  //   setForm({ title: user.title, body: user.body });
-  //   setEditingId(user.id);
-  // };
-
   const handleCancel = () => {
     setForm({title: '', body: ''});
     setEditingId(null);
   }
-
-  // const handleCancel = () => {
-  //   setForm({ title: "", body: "" });
-  //   setEditingId(null);
-  // };
 
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4">
