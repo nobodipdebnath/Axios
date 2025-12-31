@@ -51,7 +51,7 @@ function App() {
                 type="text"
                 value={form.title}
                 onChange={(e) => setForm({ ...form, title: e.target.value })}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                className="mt-1 outline-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                 placeholder="Enter title"
               />
             </div>
@@ -63,7 +63,7 @@ function App() {
                 value={form.body}
                 onChange={(e) => setForm({ ...form, body: e.target.value })}
                 rows="3"
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                className="mt-1 outline-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                 placeholder="Enter body"
               />
             </div>
@@ -71,7 +71,7 @@ function App() {
               <button
                 type="submit"
                 disabled={loading}
-                className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 disabled:opacity-50"
+                className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 disabled:opacity-50 cursor-pointer"
               >
                 {loading ? "Saving..." : editingId ? "Update" : "Create"}
               </button>
@@ -79,7 +79,7 @@ function App() {
                 <button
                   type="button"
                   onClick={handleCancel}
-                  className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600"
+                  className="px-4 py-2 bg-gray-500 cursor-pointer text-white rounded-md hover:bg-gray-600"
                 >
                   Cancel
                 </button>
@@ -90,7 +90,7 @@ function App() {
 
         {/* Posts List */}
         <div className="grid gap-4 md:grid-cols-2">
-          {users.map((user) => (
+          {users.slice(0,10).map((user) => (
             <div
               key={user.id}
               className="bg-white p-5 rounded-lg shadow hover:shadow-lg transition-shadow"
@@ -102,13 +102,13 @@ function App() {
               <div className="flex justify-end gap-2">
                 <button
                   onClick={() => handleEdit(user)}
-                  className="px-3 py-1 bg-yellow-500 text-white text-sm rounded hover:bg-yellow-600"
+                  className="px-3 py-1 cursor-pointer bg-yellow-500 text-white text-sm rounded hover:bg-yellow-600"
                 >
                   Edit
                 </button>
                 <button
                   onClick={() => deleteUser(user.id)}
-                  className="px-3 py-1 bg-red-500 text-white text-sm rounded hover:bg-red-600"
+                  className="px-3 py-1 cursor-pointer bg-red-500 text-white text-sm rounded hover:bg-red-600"
                 >
                   Delete
                 </button>
